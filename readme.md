@@ -25,7 +25,7 @@ no folders needed
 python bpc.py data/test_asset.bpc
 # output: data/test_asset.zip
 
-how to use mod.py
+## how to use mod.py
 this script decrypts all .mod files in a folder using a TEA-based algorithm and saves the results as .dff files.
 
 default setup:
