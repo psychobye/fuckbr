@@ -59,9 +59,9 @@ def batch_convert_mods(input_folder='mod', output_folder='dff'):
                     out_path = os.path.join(output_folder, filename.replace('.mod', '.dff'))
                     with open(out_path, 'wb') as out_f:
                         out_f.write(dff_data)
-                    print(f'✅ {filename} -> {os.path.basename(out_path)}')
+                    print(f'[✓] {filename} -> {os.path.basename(out_path)}')
                 except Exception as e:
-                    print(f'❌ error in {filename}: {e}')
+                    print(f'[X] error in {filename}: {e}')
 
 if __name__ == '__main__':
     batch_convert_mods()
