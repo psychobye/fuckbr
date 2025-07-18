@@ -23,6 +23,7 @@ only one file at a time
 no folders needed
 
 python bpc.py data/test_asset.bpc
+
 output: data/test_asset.zip
 
 ## how to use mod.py
