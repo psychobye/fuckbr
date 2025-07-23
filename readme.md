@@ -1,54 +1,66 @@
-# decryption tools for .bpc and .mod files
+# decryption tools for .bpc, .mod, and .btx files
 
-this repo contains two python scripts:
+this repository contains three python scripts:
 
 - `bpc.py` — decrypts `.bpc` files into `.zip`
 - `mod.py` — decrypts `.mod` files into `.dff`
+- `btx.py` — decrypts `.btx` files into `.png`
 
-no dependencies required — just python 3.8+.
+## requirements
+
+- python 3.9 (required for `PVRTexLibPy`)
+- all dependencies listed in `requirements.txt`
 
 ---
 
 ## how to use `bpc.py`
 
-this script takes a single `.bpc` file and decrypts it into a `.zip` file using a static xor key.
+decrypts a single `.bpc` file into a `.zip` archive using a static xor key.
 
-### usage:
+### usage
 
+```
 python bpc.py path/to/file.bpc
-the decrypted file will be saved in the same directory as file.zip
+```
 
-only one file at a time
+- output: `file.zip` in the same directory  
+- only one file at a time  
+- no folder structure needed  
 
-no folders needed
+example output: `data/test_asset.zip`
 
-python bpc.py data/test_asset.bpc
+---
 
-output: data/test_asset.zip
+## how to use `mod.py`
 
-## how to use mod.py
-this script decrypts all .mod files in a folder using a TEA-based algorithm and saves the results as .dff files.
+decrypts all `.mod` files in the `mod/` folder using a custom TEA-based algorithm and saves them as `.dff`.
 
-default setup:
-input folder: mod/
+- input folder: `mod/`
+- output folder: `dff/` (created automatically)
 
-output folder: dff/ (auto-created)
+### usage
 
-usage:
+```
 python mod.py
-scans the mod/ directory for .mod files
+```
 
-decrypts and writes .dff files into dff/
+- scans the `mod/` folder  
+- outputs `.dff` files to `dff/`
 
-example:
-mod/
-├── car.mod
-├── weapon.mod
+---
 
-# run script:
-python mod.py
+## how to use `btx.py`
 
-# output:
-dff/
-├── car.dff
-├── weapon.dff
+decrypts all `.btx` files in the `btx/` folder using `PVRTexLibPy` and saves them as `.png`.
+
+- input folder: `btx/`
+- output folder: `png/` (created automatically)
+
+### usage
+
+```
+python btx.py
+```
+
+- scans the `btx/` folder  
+- outputs `.png` files to `png/`
