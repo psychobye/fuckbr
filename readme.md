@@ -5,6 +5,7 @@ this repository contains three python scripts:
 - `bpc.py` — decrypts `.bpc` files into `.zip`
 - `mod.py` — decrypts `.mod` files into `.dff`
 - `btx.py` — decrypts `.btx` files into `.png`
+- `cls.py` — decrypts `.cls` files into `.col`
 
 ## requirements
 
@@ -64,3 +65,21 @@ python btx.py
 
 - scans the `btx/` folder  
 - outputs `.png` files to `png/`
+
+## how to use `cls.py`
+
+decrypts all `.cls` files in the `cls/` folder and converts them into standard GTA San Andreas `.col` files using the official COL3 format (FourCC).
+
+- input folder: `cls/`
+- output folder: `col/` (created automatically)
+
+### usage
+
+```
+python cls.py
+```
+
+- scans the `cls/` folder  
+- outputs `.col` files to `col/`
+
+---
