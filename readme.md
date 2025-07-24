@@ -48,4 +48,4 @@ if you want to run the GUI directly from source, just:
 
 ---
 
-### This project is licensed under GPLv3. See LICENSE.txt for details.
+### This project is licensed under GPLv3. See LICENSE.md for details.
