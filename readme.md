@@ -44,4 +44,8 @@ if you want to run the GUI directly from source, just:
 
 - the `.exe` includes all needed binaries like `PVRTexLibPy.pyd` 
 - the GUI has separate tabs for each format with browse buttons and output folder selectors  
-- logs each file processed and shows success/errors in the GUI log box  
+- logs each file processed and shows success/errors in the GUI log box
+
+---
+
+### This project is licensed under GPLv3. See LICENSE.txt for details.
