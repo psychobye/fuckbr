@@ -1,5 +1,4 @@
 import os
-import sys
 
 key = b"1cK1a5UF2tU8*G2lW#&%"
 
@@ -21,16 +20,3 @@ def convert_bpc_file(filepath: str, out_dir: str = None) -> str:
     with open(out_path, 'wb') as f:
         f.write(dec)
     return out_path
-
-if __name__ == "__main__":
-    import argparse
-    p = argparse.ArgumentParser(description="Decrypt .bpc to .zip")
-    p.add_argument("input", help="path to .bpc file")
-    p.add_argument("--out", help="output folder", default=None)
-    args = p.parse_args()
-    try:
-        out = convert_bpc_file(args.input, args.out)
-        print("Saved:", out)
-    except Exception as e:
-        print("Error:", e)
-        sys.exit(1)

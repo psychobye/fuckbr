@@ -1,5 +1,4 @@
 import os
-import sys
 import struct
 
 def split_cls_file(in_path: str, out_dir: str) -> list:
@@ -28,16 +27,3 @@ def split_cls_file(in_path: str, out_dir: str) -> list:
         cnt += 1
         idx = pos + length
     return res
-
-if __name__ == "__main__":
-    import argparse
-    p = argparse.ArgumentParser("CLS→COL")
-    p.add_argument("inputs", nargs='+', help=".cls files")
-    p.add_argument("--out", help="out dir", default="col")
-    args = p.parse_args()
-    for f in args.inputs:
-        try:
-            lst = split_cls_file(f, args.out)
-            for x in lst: print("[+]", x)
-        except Exception as e:
-            print("[!]", f, e)

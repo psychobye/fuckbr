@@ -4,7 +4,7 @@ import asyncio
 import threading
 import customtkinter as ctk
 from tkinter import filedialog
-from PIL import Image
+from PIL import Image # for PVRTexLibPy
 
 # dont import btx cause you need only python 3.9 :3
 try:
@@ -15,7 +15,7 @@ except ImportError:
 
 from bpc import convert_bpc_file
 from cls import split_cls_file
-from mod import decrypt_mod
+import mod
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
@@ -84,7 +84,7 @@ def run_bpc(inp, out):
             log(f"[X] BPC error: {e}")
     _run_in_thread(task)
 
-from cls import split_cls_file
+# TODO async
 def run_cls(files, out):
     def task():
         if not files:
@@ -103,27 +103,16 @@ def run_cls(files, out):
             log("[✓] CLS done")
     _run_in_thread(task)
 
-from mod import decrypt_mod
 def run_mod(files, out):
     def task():
         if not files:
             log("select .mod files")
             return
-        success = False
-        for f in files:
-            try:
-                data = decrypt_mod(f)
-                name = os.path.splitext(os.path.basename(f))[0] + '.dff'
-                os.makedirs(out or 'dff', exist_ok=True)
-                path = os.path.join(out or 'dff', name)
-                with open(path, 'wb') as w:
-                    w.write(data)
-                log(f"[~] MOD → {path}")
-                success = True
-            except Exception as e:
-                log(f"[X] MOD error: {e}")
-        if success:
+        try:
+            mod.convert(files, out or '.', log)
             log("[✓] MOD done")
+        except Exception as e:
+            log(f"[X] MOD error: {e}")
     _run_in_thread(task)
 
 def run_btx(files, out):
