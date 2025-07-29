@@ -31,7 +31,7 @@ icon_path = os.path.join(base_path, "icon.ico")
 app.iconbitmap(icon_path)
 
 app.title("unware")
-app.geometry("700x400")
+app.geometry("700x400") # maybe adaptive?
 
 tabview = ctk.CTkTabview(app, width=660, height=100)
 for name in ["BPC", "CLS", "MOD", "BTX"]:

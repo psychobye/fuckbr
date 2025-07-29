@@ -50,7 +50,6 @@ def decrypt_mod_to_dff(mod_bytes: bytes) -> bytes:
     dff = clean_dff_data(dff)
     return bytes(dff)
 
-
 async def convert_one(mod_path: str, out_dir: str, log=None):
     name = os.path.splitext(os.path.basename(mod_path))[0]
     if log:
@@ -67,11 +66,9 @@ async def convert_one(mod_path: str, out_dir: str, log=None):
     except Exception as e:
         print(f"[X] error {name}: {e}")
 
-
 async def batch(mod_paths: list[str], out_dir: str, log=None):
     tasks = [convert_one(p, out_dir, log) for p in mod_paths]
     await asyncio.gather(*tasks)
-
 
 def convert(mod_paths: list[str], out_dir: str, log=None):
     asyncio.run(batch(mod_paths, out_dir, log))
