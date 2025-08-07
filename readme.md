@@ -7,7 +7,6 @@ this is the decryption tools for BLACK RUSSIA!
 ## requirements
  
 - python 3.9+
-- all dependencies listed in `requirements.txt`
 
 ---
 
