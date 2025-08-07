@@ -14,9 +14,17 @@ this is the decryption tools for BLACK RUSSIA!
 ## how to use
 
 for decrypt (`mod`, `btx`, `cls`) files, just use:
-```py file_type.py -i C:\input -o C:\output```
+
+```bash
+py file_type.py -i C:\input -o C:\output
+```
 
 for decrypt `bpc`, use:
-```py bpc.py -i C:\input```
+
+```bash
+    py bpc.py -i C:\input
+    ```
+
+---
 
 ### This project is licensed under MIT. See LICENSE for details.
