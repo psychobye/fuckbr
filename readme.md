@@ -12,7 +12,7 @@ this is the decryption tools for BLACK RUSSIA!
 
 ## how to use
 
-for decrypt (`mod`, `btx`, `cls`) files, just use:
+for decrypt (`mod`, `btx`, `cls`, `ani`) files, just use:
 
 ```bash
 py file_type.py -i C:\input -o C:\output
