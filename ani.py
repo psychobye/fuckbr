@@ -14,20 +14,23 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
+    in_path_obj = Path(in_path)
     if not Path(in_path).is_file():
         log.warning(f"[ani_convert] file not found: {in_path}")
         return None
 
-    # legendary dec by psychobye xD
-    out_dir_path = Path(out_dir)
-    out_dir_path.mkdir(parents=True, exist_ok=True)
+    data = bytearray(in_path_obj.read_bytes())
 
-    in_path_obj = Path(in_path)
-    new_name = in_path_obj.stem + ".ifp"
-    out_path = out_dir_path / new_name
+    # what a hell -_- (dec by - brfiles)
+    x, y = (0x20, 0x04)
+    data[y:y] = data[x:x+4]
+    del data[x+4:x+8]
 
-    # just rename file ani to ifp LOL
-    out_path.write_bytes(in_path_obj.read_bytes())
+    new_ext = ".ifp"
+    new_name = in_path_obj.stem + new_ext
+    out_path = Path(out_dir) / new_name
+    Path(out_dir).mkdir(parents=True, exist_ok=True)
+    out_path.write_bytes(data)
 
     log.info(f"[ani_convert] saved: {out_path}")
     return str(in_path), str(out_path)
