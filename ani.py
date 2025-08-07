@@ -18,7 +18,7 @@ def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
         log.warning(f"[ani_convert] file not found: {in_path}")
         return None
 
-    # legendary dec by psychobe xD
+    # legendary dec by psychobye xD
     out_dir_path = Path(out_dir)
     out_dir_path.mkdir(parents=True, exist_ok=True)
 
