@@ -1,4 +1,1 @@
-__pycache__
-build
-dist
-*.spec
+*__pycache__

@@ -1,51 +1,22 @@
-# FUCKBR GUI (unware)
+# FUCKBR
 
-this is the graphical interface with decryption tools (`bpc`, `mod`, `btx`, `cls`).
+this is the decryption tools for BLACK RUSSIA!
 
 ---
 
 ## requirements
-
-- **python 3.9 only!** (mandatory for PVRTexLibPy compatibility)  
+ 
+- python 3.9+
 - all dependencies listed in `requirements.txt`
 
 ---
 
-## about the GUI
+## how to use
 
-- all the logic and UI live in `unware.py`  
-- this lets you decrypt `.bpc`, `.mod`, `.btx`, and `.cls` files easily with a nice GUI
+for decrypt (`mod`, `btx`, `cls`) files, just use:
+```py file_type.py -i C:\input -o C:\output```
 
----
+for decrypt `bpc`, use:
+```py bpc.py -i C:\input```
 
-## how to build
-
-just run the provided `build.bat` script in the repo root:
-
-`build.bat`
-
-this will create a single executable `.exe` file in:
-
-`dist/unware.exe`
-
----
-
-## how to run (dev)
-
-if you want to run the GUI directly from source, just:
-
-`python unware.py`
-
-(make sure you're using python 3.9)
-
----
-
-## Notes
-
-- the `.exe` includes all needed binaries like `PVRTexLibPy.pyd` 
-- the GUI has separate tabs for each format with browse buttons and output folder selectors  
-- logs each file processed and shows success/errors in the GUI log box
-
----
-
-### This project is licensed under GPLv3. See LICENSE.md for details.
+### This project is licensed under MIT. See LICENSE for details.
