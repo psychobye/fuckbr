@@ -22,9 +22,9 @@ py file_type.py -i C:\input -o C:\output
 for decrypt `bpc`, use:
 
 ```bash
-    py bpc.py -i C:\input
-    ```
+py bpc.py -i C:\input
+```
 
 ---
 
-### This project is licensed under MIT. See LICENSE for details.
+### this project is licensed under MIT. see LICENSE for details.
