@@ -1,4 +1,0 @@
-pyinstaller
-numpy
-pillow
-customtkinter
