@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Optional, Tuple
 
 parser = argparse.ArgumentParser(description="CLS")
-parser.add_argument("-i", "--input", type=str, required=True, help="path to the BTX")
+parser.add_argument("-i", "--input", type=str, required=True, help="path to the CLS")
 parser.add_argument("-o", "--output", type=str, required=True, help="output directory")
 args = parser.parse_args()
 
@@ -17,6 +17,9 @@ log = logging.getLogger(__name__)
 def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
     data = bytearray(open(in_path, "rb").read())
     Path(out_dir).mkdir(parents=True, exist_ok=True)
+
+    file_name = f"{Path(in_path).name}"
+    log.info(f"[cls_convert] starting conversion for {file_name}")
 
     idx = 0
     cnt = 0
