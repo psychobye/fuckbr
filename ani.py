@@ -5,6 +5,10 @@ import logging
 from pathlib import Path
 from typing import Optional, Tuple
 
+from config import (
+    SEMAPHORE
+)
+
 parser = argparse.ArgumentParser(description="ANI")
 parser.add_argument("-i", "--input", type=str, required=True, help="path to the ANI")
 parser.add_argument("-o", "--output", type=str, required=True, help="output directory")
@@ -13,7 +17,7 @@ args = parser.parse_args()
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
-def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
+async def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
     in_path_obj = Path(in_path)
     if not Path(in_path).is_file():
         log.warning(f"[ani_convert] file not found: {in_path}")
@@ -35,12 +39,16 @@ def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
     log.info(f"[ani_convert] saved: {out_path}")
     return str(in_path), str(out_path)
 
+async def semaphore(ani_path, out_dir):
+    async with SEMAPHORE:
+        return await convert(ani_path, out_dir)
+
 async def batch(input_dir: str, out_dir: str):
     ani_files = list(Path(input_dir).glob("*.ani"))
     if not ani_files:
         log.warning(f"[ani_convert] no ANI files found in {input_dir}")
         return
-    tasks = [asyncio.to_thread(convert, str(p), out_dir) for p in ani_files]
+    tasks = [semaphore(str(p), out_dir) for p in ani_files]
     await asyncio.gather(*tasks)
 
 def main():

@@ -6,6 +6,10 @@ import struct
 from pathlib import Path
 from typing import Optional, Tuple
 
+from config import (
+    SEMAPHORE
+)
+
 parser = argparse.ArgumentParser(description="CLS")
 parser.add_argument("-i", "--input", type=str, required=True, help="path to the CLS")
 parser.add_argument("-o", "--output", type=str, required=True, help="output directory")
@@ -14,7 +18,7 @@ args = parser.parse_args()
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
-def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
+async def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
     data = bytearray(open(in_path, "rb").read())
     Path(out_dir).mkdir(parents=True, exist_ok=True)
 
@@ -72,12 +76,16 @@ def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
     log.info(f"[cls_convert] saved merged {out_path} with {len(blocks)} blocks, total {len(merged)} bytes")
     return [out_path]
 
+async def semaphore(cls_path, out_dir):
+    async with SEMAPHORE:
+        return await convert(cls_path, out_dir)
+
 async def batch(input_dir: str, out_dir: str):
     cls_files = list(Path(input_dir).glob("*.cls"))
     if not cls_files:
         log.warning(f"[cls_convert] no CLS files found in {input_dir}")
         return
-    tasks = [asyncio.to_thread(convert, str(p), out_dir) for p in cls_files]
+    tasks = [semaphore(str(p), out_dir) for p in cls_files]
     await asyncio.gather(*tasks)
 
 def main():

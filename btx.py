@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Optional, Tuple
 
 from config import (
-    TEMP
+    TEMP,
+    SEMAPHORE
 )
 
 from utils import (
@@ -66,12 +67,16 @@ async def convert(btx_path: str, out_dir: str) -> Optional[Tuple[bytes, str]]:
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
 
+async def semaphore(btx_path, out_dir):
+    async with SEMAPHORE:
+        return await convert(btx_path, out_dir)
+
 async def batch(input_dir: str, out_dir: str):
     btx_files = list(Path(input_dir).glob("*.btx"))
     if not btx_files:
         log.warning(f"[btx_convert] no BTX files found in {input_dir}")
         return
-    tasks = [asyncio.to_thread(convert, p, out_dir) for p in btx_files]
+    tasks = [semaphore(str(p), out_dir) for p in btx_files]
     await asyncio.gather(*tasks)
 
 def main():

@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 import platform
 import logging
@@ -6,8 +7,8 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 BASE_PATH = Path(__file__).parent.resolve()
-
 TEMP = BASE_PATH / "temp"
+SEMAPHORE = asyncio.Semaphore(5) # limit concurrent tasks
 
 if platform.system() == "Linux":
     KRAM_PATH = BASE_PATH / "kram/linux/kram"

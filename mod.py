@@ -5,6 +5,10 @@ import asyncio
 
 from pathlib import Path
 
+from config import (
+    SEMAPHORE
+)
+
 parser = argparse.ArgumentParser(description="MOD")
 parser.add_argument("-i", "--input", type=str, required=True, help="path to the MOD")
 parser.add_argument("-o", "--output", type=str, required=True, help="output directory")
@@ -73,6 +77,10 @@ async def convert(mod_path: str, out_dir: str):
         log.info(f"[✓] {name}.dff")
     except Exception as e:
         log.error(f"[X] error {name}: {e}")
+
+async def semaphore(mod_path, out_dir):
+    async with SEMAPHORE:
+        return await convert(mod_path, out_dir)
 
 async def batch(input_dir: str, out_dir: str):
     files = list(Path(input_dir).glob("*.mod"))
