@@ -4,10 +4,7 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-from config import (
-    KRAM_PATH,
-    PVR_PATH
-)
+from config import KRAM_PATH, PVR_PATH
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)

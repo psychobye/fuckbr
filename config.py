@@ -18,5 +18,3 @@ elif platform.system() == "Windows":
     PVR_PATH = BASE_PATH / "pvr/win/PVRTexToolCLI.exe"
 else:
     log.error("[X] error: unknown platform")
-
-# MAYBE TO DO FOR MAC? :3

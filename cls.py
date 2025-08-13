@@ -6,9 +6,7 @@ import struct
 from pathlib import Path
 from typing import Optional, Tuple
 
-from config import (
-    SEMAPHORE
-)
+from config import SEMAPHORE
 
 parser = argparse.ArgumentParser(description="CLS")
 parser.add_argument("-i", "--input", type=str, required=True, help="path to the CLS")

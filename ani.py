@@ -5,9 +5,7 @@ import logging
 from pathlib import Path
 from typing import Optional, Tuple
 
-from config import (
-    SEMAPHORE
-)
+from config import SEMAPHORE
 
 parser = argparse.ArgumentParser(description="ANI")
 parser.add_argument("-i", "--input", type=str, required=True, help="path to the ANI")
@@ -25,13 +23,11 @@ async def convert(in_path: str, out_dir: str) -> Optional[Tuple[str, str]]:
 
     data = bytearray(in_path_obj.read_bytes())
 
-    # what a hell -_- (dec by - brfiles)
     x, y = (0x20, 0x04)
     data[y:y] = data[x:x+4]
     del data[x+4:x+8]
 
-    new_ext = ".ifp"
-    new_name = in_path_obj.stem + new_ext
+    new_name = in_path_obj.stem + ".ifp"
     out_path = Path(out_dir) / new_name
     Path(out_dir).mkdir(parents=True, exist_ok=True)
     out_path.write_bytes(data)

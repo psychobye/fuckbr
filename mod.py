@@ -5,9 +5,7 @@ import asyncio
 
 from pathlib import Path
 
-from config import (
-    SEMAPHORE
-)
+from config import SEMAPHORE
 
 parser = argparse.ArgumentParser(description="MOD")
 parser.add_argument("-i", "--input", type=str, required=True, help="path to the MOD")

@@ -8,10 +8,7 @@ import tempfile
 from pathlib import Path
 from typing import Optional, Tuple
 
-from config import (
-    TEMP,
-    SEMAPHORE
-)
+from config import TEMP, SEMAPHORE
 
 from utils import (
     write_file,
